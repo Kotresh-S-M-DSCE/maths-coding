@@ -1,0 +1,11 @@
+class Solution {
+    public int trailingZeroes(int n) {
+        int count=0,pow=1;
+        for(int i=1;i<10;i++)
+        {
+            pow=pow*5;
+            count=count+n/pow;
+        }
+        return count;
+    }
+}
