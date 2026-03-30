@@ -1,0 +1,19 @@
+class Solution {
+    public int[] constructRectangle(int area) {
+        double a=Math.sqrt(area);
+        int num=(int)a;
+        List<Integer> arr=new ArrayList<>();
+        for(int i=1;i<=num;i++)
+        {
+            if(area%i==0)
+            {
+               arr.add(i);
+               arr.add(area/i);
+            }           
+        }
+        int[] te=new int[2];
+        te[0]=arr.get(arr.size()-1);
+        te[1]=arr.get(arr.size()-2);
+        return te;
+    }
+}
