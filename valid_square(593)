@@ -1,0 +1,50 @@
+class Solution {
+    public boolean validSquare(int[] p1, int[] p2, int[] p3, int[] p4) {
+        int[][] arr=new int[4][2];
+        arr[0][0]=p1[0];
+        arr[0][1]=p1[1];
+        arr[1][0]=p2[0];
+        arr[1][1]=p2[1];
+        arr[2][0]=p3[0];
+        arr[2][1]=p3[1];
+        arr[3][0]=p4[0];
+        arr[3][1]=p4[1];
+        if(arr[0][0]==arr[1][0]&&arr[0][1]==arr[1][1])
+            return false;
+        Arrays.sort(arr, (a, b) -> a[0] == b[0] ? a[1] - b[1] : a[0] - b[0]);
+        for(int i=0;i<4;i++)
+        {
+            if(i==0||i==3)
+            {
+                int t12=(arr[i][0]-arr[1][0])*(arr[i][0]-arr[1][0]);
+                int t22=(arr[i][1]-arr[1][1])*(arr[i][1]-arr[1][1]);
+                double sq1=Math.sqrt(t12+t22);
+                int t13=(arr[i][0]-arr[2][0])*(arr[i][0]-arr[2][0]);
+                int t23=(arr[i][1]-arr[2][1])*(arr[i][1]-arr[2][1]);
+                double sq2=Math.sqrt(t13+t23);
+                if(sq1!=sq2)
+                   return false;
+            }
+            if(i==1||i==2)
+            {
+                int t12=(arr[i][0]-arr[0][0])*(arr[i][0]-arr[0][0]);
+                int t22=(arr[i][1]-arr[0][1])*(arr[i][1]-arr[0][1]);
+                double sq1=Math.sqrt(t12+t22);
+                int t13=(arr[i][0]-arr[3][0])*(arr[i][0]-arr[3][0]);
+                int t23=(arr[i][1]-arr[3][1])*(arr[i][1]-arr[3][1]);
+                double sq2=Math.sqrt(t13+t23);
+                if(sq1!=sq2)
+                   return false;
+            }
+        }
+        int t12=(arr[1][0]-arr[2][0])*(arr[1][0]-arr[2][0]);
+        int t22=(arr[1][1]-arr[2][1])*(arr[1][1]-arr[2][1]);
+        double sq1=Math.sqrt(t12+t22);
+        int t03=(arr[0][0]-arr[3][0])*(arr[0][0]-arr[3][0]);
+        int t13=(arr[0][1]-arr[3][1])*(arr[0][1]-arr[3][1]);
+        double sq2=Math.sqrt(t03+t13);
+        if(sq1!=sq2)
+            return false;
+        return true;
+    }
+}
