@@ -1,0 +1,13 @@
+class Solution {
+    public int minimumPushes(String w) {
+        if(w.length()<=8)
+           return w.length();
+        if(w.length()>8&&w.length()<=16)
+           return (8+2*(w.length()-8));
+        if(w.length()>16&&w.length()<=24)
+           return (24+3*(w.length()-16));
+        if(w.length()==25)
+           return 52;
+        return 56;
+    }
+}
