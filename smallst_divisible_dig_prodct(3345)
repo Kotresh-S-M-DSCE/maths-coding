@@ -1,0 +1,55 @@
+class Solution {
+    public int smallestNumber(int n, int t) {
+        List<Integer> list=new ArrayList<>();
+        int pro=1,j=0,flag=0;
+        while(n>0)
+        {
+            pro*=(n%10);
+            list.add(n%10);
+            n/=10;
+        }
+        int[] arr=new int[list.size()];
+        for(int i=list.size()-1;i>=0;i--)
+           arr[j++]=list.get(i);
+        while(true)
+        {
+            if(pro%t==0)
+               break;
+            else
+            {
+                if(arr[arr.length-1]==9)
+                {
+                    flag=1;
+                    arr[arr.length-1]=0;
+                    break;
+                }
+                pro/=arr[arr.length-1];
+                arr[arr.length-1]++;
+                pro*=(arr[arr.length-1]);
+            }
+        }
+        int ret=0;
+        if(flag==1)
+        {
+            for(int i=arr.length-2;i>=0;i--)
+            {
+                if(arr[i]==9)
+                   arr[i]=0;
+                else 
+                {
+                   arr[i]++;
+                   break;
+                }
+            }
+            int temp=0;
+            if(arr[0]==0)
+                temp=1;
+            for(int i=0;i<arr.length;i++)
+               temp=temp*10+arr[i];
+            return temp;
+        }
+        for(int i=0;i<arr.length;i++)
+           ret=ret*10+arr[i];
+        return ret;
+    }
+}
