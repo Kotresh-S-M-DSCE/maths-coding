@@ -1,0 +1,47 @@
+class Solution {
+    public int findTheWinner(int n, int k) {
+        List<Integer> list1=new ArrayList<>();
+        List<Integer> list2=new ArrayList<>();
+        if(k==1)
+           return n;
+        for(int i=1;i<=n;i++)
+           list1.add(i);
+        int temp=1;
+        while(list1.size()!=1&&list2.size()!=1)
+        {
+            if(list1.size()==0)
+            {
+                // temp=1;
+                for(int i=0;i<list2.size();i++)
+                {
+                    if(temp!=k)
+                    {
+                        list1.add(list2.get(i));
+                        temp++;
+                    }
+                    else
+                        temp=1;
+                }
+                list2.clear();
+            }
+            if(list2.size()==0)
+            {
+                // temp=1;
+                for(int i=0;i<list1.size();i++)
+                {
+                    if(temp!=k)
+                    {
+                        list2.add(list1.get(i));
+                        temp++;
+                    }
+                    else
+                        temp=1;
+                }
+                list1.clear();
+            }
+        }
+        if(list1.size()==1)
+           return list1.get(0);
+        return list2.get(0);
+    }
+}
