@@ -1,0 +1,28 @@
+class Solution {
+    List<List<Integer>> ret=new ArrayList<>();
+    public void fun(int[] arr,int low,int k,List<Integer> list)
+    {
+        if(list.size()<k)
+        {
+            for(int i=low;i<arr.length;i++)
+            {
+                list.add(arr[i]);
+                fun(arr,i+1,k,list);
+                list.remove(list.size()-1);
+            }
+        }
+        else if(list.size()==k)
+        {
+            List<Integer> temp=new ArrayList<>(list);
+            ret.add(temp);
+        }
+        else{}
+    }
+    public List<List<Integer>> combine(int n, int k) {
+        int[] arr=new int[n];
+        for(int i=0;i<n;i++)
+           arr[i]=i+1;
+        fun(arr,0,k,new ArrayList<>());    
+        return ret;
+    }
+}
