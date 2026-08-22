@@ -1,0 +1,36 @@
+class Solution {
+    Map<Character,List<Character>> map=new HashMap<>();
+    // constructor(to automatically invoke when object for class Solution is created)
+    Solution()
+    {
+        map.put('2',List.of('a','b','c'));
+        map.put('3',List.of('d','e','f'));
+        map.put('4',List.of('g','h','i'));
+        map.put('5',List.of('j','k','l'));
+        map.put('6',List.of('m','n','o'));
+        map.put('7',List.of('p','q','r','s'));
+        map.put('8',List.of('t','u','v'));
+        map.put('9',List.of('w','x','y','z'));
+    }
+    List<String> ret=new ArrayList<>(); 
+    public void fun(String d,int low,StringBuilder sb)
+    {
+        if(low<d.length())
+        {
+            List<Character> list=new ArrayList<>(map.get(d.charAt(low)));
+            for(int i=0;i<list.size();i++)
+            {
+                sb.append(list.get(i));
+                fun(d,low+1,sb);
+                sb.deleteCharAt(sb.length()-1);
+            }
+        }
+        else if(low==d.length())
+           ret.add(sb.toString());
+        else{}
+    }
+    public List<String> letterCombinations(String d) {
+        fun(d,0,new StringBuilder());
+        return ret;
+    }
+}
