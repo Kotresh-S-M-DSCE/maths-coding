@@ -1,0 +1,38 @@
+class Solution {
+    int count=1;
+    public String fun(StringBuilder sb,int n,int k,boolean[] bool,char[] ch)
+    {
+        if(sb.length()==n&&count<k)
+        {
+           count++;
+           return "";
+        }
+        if(sb.length()==n&&count==k)
+           return sb.toString();
+        for(int i=0;i<n;i++)
+        {
+            if(bool[i]==false)
+            {
+                bool[i]=true;
+                sb.append(ch[i]);
+                String str=fun(sb,n,k,bool,ch);
+                if(str.length()!=0)
+                   return str;
+                sb.deleteCharAt(sb.length()-1);
+                bool[i]=false;
+            }
+        }
+        return "";
+    }
+    public String getPermutation(int n, int k) {
+        boolean[] bool=new boolean[n];
+        char[] ch=new char[n];
+        int a=1;
+        for(int i=0;i<n;i++)
+        {
+            ch[i]=(char)((a++)+'0');
+            bool[i]=false;
+        }
+        return fun(new StringBuilder(),n,k,bool,ch);
+    }
+}
