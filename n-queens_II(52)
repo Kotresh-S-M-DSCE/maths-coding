@@ -1,0 +1,33 @@
+class Solution {
+    int count=0;
+    public void fun(int n,int row,List<Integer> list)
+    {
+        if(row==n)
+        {
+            count++;
+            return;
+        }
+        for(int i=0;i<n;i++)
+        {
+            boolean bool=true;
+            for(int j=0;j<list.size();j++)
+            {
+                if((i==list.get(j))||(Math.abs(row-j)==Math.abs(i-list.get(j))))
+                {
+                    bool=false;
+                    break;
+                }
+            }
+            if(bool==true)
+            {
+                list.add(i);
+                fun(n,row+1,list);
+                list.remove(list.size()-1);
+            }
+        }
+    }
+    public int totalNQueens(int n) {
+        fun(n,0,new ArrayList<>());
+        return count;
+    }
+}
