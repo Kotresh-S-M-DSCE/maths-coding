@@ -1,0 +1,33 @@
+class Solution {
+    List<String> ret=new ArrayList<>();
+    public void fun(String s,int i,StringBuilder sb)
+    {
+        if(sb.length()==s.length())
+        {
+            ret.add(sb.toString());
+            return;
+        }
+        if(Character.isDigit(s.charAt(i)))
+        {
+            sb.append(s.charAt(i));
+            fun(s,i+1,sb);
+            sb.deleteCharAt(sb.length()-1);
+            return;
+        }
+        for(int j=0;j<2;j++)
+        {
+            if(j==0)
+                sb.append(s.charAt(i));
+            else
+                sb.append(Character.toUpperCase(s.charAt(i)));
+            fun(s,i+1,sb);
+            sb.deleteCharAt(sb.length()-1);
+        }
+    }
+    public List<String> letterCasePermutation(String s) {
+        //aab aaB aAb aAB Aab AaB AAb AAB
+        s=s.toLowerCase(); 
+        fun(s,0,new StringBuilder());
+        return ret;
+    }
+}
