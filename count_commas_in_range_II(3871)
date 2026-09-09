@@ -1,0 +1,32 @@
+class Solution {
+    public long countCommas(long n) {
+        //999,999,999 46,895,740 1,000,000 999,999 678,743 1,000    999000+ 0 1 2 3 4 5 6 7 
+        List<Integer> list=new ArrayList<>();
+        long temp=n,count=0,j=0,k=0,ret=0,cur;
+        while(n>0)
+        {
+            long rem=n%10;
+            list.add((int)rem);
+            n/=10;
+        }
+        int[] arr=new int[list.size()];
+        int m=list.size()-1;
+        for(int i=0;i<list.size();i++)
+           arr[i]=list.get(m--);
+        for(int i=arr.length-1;i>=0;i--)
+        {
+            if((arr.length-1-i)%3==0&&(arr.length-1-i)!=0)
+            {
+                j=k;
+                k+=1;
+                k*=1000;
+                k-=1;
+                cur=k-j;
+                cur=cur*(count++);
+                ret+=cur;
+            }
+        }
+        ret=(temp-k)*count+ret;
+        return ret;
+    }
+}
