@@ -1,0 +1,32 @@
+class Solution {
+    int max=0;
+    public void fun(int n,int[][] req,int[] arr,List<List<Integer>> list,int low)
+    {
+        int j=0;
+        for(;j<n;j++)
+        {
+            if(arr[j]!=0)
+               break;
+        }
+        if(j==n)
+            max=Math.max(max,list.size());
+        for(int i=low;i<req.length;i++)
+        {
+            arr[req[i][0]]++;
+            arr[req[i][1]]--;
+            List<Integer> temp=new ArrayList<>();
+            temp.add(req[i][0]);
+            temp.add(req[i][1]);
+            list.add(temp);
+            fun(n,req,arr,list,i+1);
+            arr[req[i][0]]--;
+            arr[req[i][1]]++;
+            list.remove(list.size()-1);
+        }
+    }
+    public int maximumRequests(int n, int[][] requests) {
+        int[] arr=new int[n];
+        fun(n,requests,arr,new ArrayList<>(),0);
+        return max;
+    }
+}
