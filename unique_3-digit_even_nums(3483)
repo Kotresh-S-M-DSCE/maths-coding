@@ -1,0 +1,47 @@
+class Solution {
+    int ret=0;
+    public void perm(List<Integer> arr,boolean[] bool,List<Integer> list)
+    {
+        if(list.size()==3)
+        {
+            if(list.get(list.size()-1)%2==0&&list.get(0)!=0)
+               ret++;
+            return;
+        }
+        int temp=1000;
+        for(int i=0;i<3;i++)
+        {
+            if(bool[i]==false&&arr.get(i)!=temp)
+            {
+                list.add(arr.get(i));
+                temp=arr.get(i);
+                bool[i]=true;
+                perm(arr,bool,list);
+                bool[i]=false;
+                list.remove(list.size()-1);
+            }
+        }
+    }
+    public void comb(int[] digs,List<Integer> list,int st)
+    {
+        if(list.size()==3)
+        {
+            perm(list,new boolean[3],new ArrayList<>());
+            return;
+        }
+        for(int i=st;i<digs.length;i++)
+        {
+            if(i>st&&digs[i]==digs[i-1])
+               continue;
+            list.add(digs[i]);
+            comb(digs,list,i+1);
+            list.remove(list.size()-1);
+        }
+    }
+    public int totalNumbers(int[] digits) {
+       // 1 2 2 3 4 5 5
+       Arrays.sort(digits);
+       comb(digits,new ArrayList<>(),0);
+       return ret;
+    }
+}
