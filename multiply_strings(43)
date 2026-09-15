@@ -1,0 +1,68 @@
+class Solution {
+    public String fun(String str1,String str2,int n)
+    {
+        if(n==0)
+           return str1;
+        StringBuilder sb=new StringBuilder();
+        int i=str1.length()-1,j=str2.length()-1,carry=0;
+        while(i>=0||j>=0)
+        {
+            int temp;
+            if(i<0)
+               temp=str2.charAt(j)-'0'+carry;
+            else if(j<0)
+               temp=str1.charAt(i)-'0'+carry;
+            else
+               temp=str1.charAt(i)-'0'+str2.charAt(j)-'0'+carry;
+            carry=0;
+            if(temp>9)
+            {
+                carry=temp/10;
+                temp%=10;
+            }
+            sb.append(temp);
+            i--;
+            j--;
+        }
+        if(carry!=0)
+           sb.append(carry);
+        sb.reverse();
+        return sb.toString();
+    }
+    public String multiply(String num1, String num2) {
+       // 738   34728291 46 47281963
+       //615
+      //492
+        if((num1.length()==1&&num1.charAt(0)=='0')||(num2.length()==1&&num2.charAt(0)=='0'))
+           return "0";
+        if(num1.length()<num2.length())
+        {
+            String temp=num1;
+            num1=num2;
+            num2=temp;
+        }
+        String str="";
+        for(int i=num2.length()-1;i>=0;i--)
+        {
+            int carry=0;
+            StringBuilder sb=new StringBuilder();
+            for(int j=num1.length()-1;j>=0;j--)
+            {
+                int mul=(num2.charAt(i)-'0')*(num1.charAt(j)-'0')+carry;
+                carry=0;
+                if(mul>9)
+                {
+                    carry=mul/10;
+                    mul%=10;
+                }
+                sb.append(mul);
+            }
+            if(carry!=0)
+               sb.append(carry);
+            sb.reverse();
+            sb.append("0".repeat(num2.length()-1-i));
+            str=fun(sb.toString(),str,num2.length()-1-i);
+        }
+        return str;
+    }
+}
