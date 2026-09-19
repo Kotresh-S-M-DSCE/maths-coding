@@ -1,0 +1,45 @@
+class Solution {
+    public List<Integer> powerfulIntegers(int x, int y, int bound) {
+        Set<Integer> set=new HashSet<>();
+        if(x==1||y==1)
+        {
+            if(x==1&&y==1)
+            {
+                if(bound>1)
+                   return List.of(2);
+                else
+                   return new ArrayList<>();
+            }
+            if(x==1&&y>1)
+            {
+                int temp=x;
+                x=y;
+                y=temp;
+            }
+            for(int i=0;true;i++)
+            {
+                double temp=Math.pow(x,i)+1;
+                if((int)temp<=bound)
+                   set.add((int)temp);
+                else
+                   break;
+            }
+            return new ArrayList<>(set);
+        }
+        for(int i=0;true;i++)
+        {
+            int j;
+            for(j=0;true;j++)
+            {
+                double temp=Math.pow(x,i)+Math.pow(y,j);
+                if((int)temp<=bound)
+                   set.add((int)temp);
+                else
+                   break;
+            }
+            if(j==0)
+               break;
+        }
+        return new ArrayList<>(set);
+    }
+}
