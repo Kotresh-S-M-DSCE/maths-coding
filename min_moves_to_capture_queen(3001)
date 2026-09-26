@@ -1,0 +1,20 @@
+class Solution {
+    public int minMovesToCaptureTheQueen(int a, int b, int c, int d, int e, int f) {
+        if(Math.abs(c-e)==Math.abs(d-f))
+        {
+            if(Math.abs(a-e)==Math.abs(b-f))
+            {
+                if((e<a&&f<b&&a<c&&b<d)||(e>a&&f>b&&a>c&&b>d)||(e>a&&a>c&&f<b&&b<d)||(e<a&&a<c&&f>b&&b>d))
+                   return 2;
+            }
+            return 1;
+        }
+        if(a==e||b==f)
+        {
+            if((a==e&&c==e&&((f<d&&d<b)||(f>d&&b<d)))||(b==f&&d==f&&((e<c&&c<a)||(e>c&&c>a))))
+                return 2;
+            return 1;
+        }
+        return 2;
+    }
+}
