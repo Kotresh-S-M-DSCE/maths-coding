@@ -1,0 +1,22 @@
+class Solution {
+    public String maxSumOfSquares(int num, int sum) {
+        //990 981 972 963 954 882 873 864 855 765 774 666 
+        //162 146 134 126 122 132 122 116 114 110 114 108
+        StringBuilder sb=new StringBuilder();
+        int cur=num*9,i;
+        if(cur<sum)
+           return "";
+        for(i=0;i<num;i++)
+           sb.append('9');
+        i--;
+        while(cur>=sum&&i>=0)
+        {
+            cur-=9;
+            sb.setCharAt(i--,'0');
+        }
+        i++;
+        int n=sum-cur;
+        sb.setCharAt(i,(char)(n+'0'));
+        return sb.toString();
+    }
+}
