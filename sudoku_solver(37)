@@ -1,0 +1,50 @@
+class Solution {
+    public boolean fun(char[][] board,int i,int j)
+    {
+        if(j==9)
+        {
+            if(i==8)
+               return true;
+            return fun(board,i+1,0);
+        }
+        if(board[i][j]!='.')
+            return fun(board,i,j+1);
+        Set<Integer> row=new HashSet<>();
+        Set<Integer> col=new HashSet<>();
+        Set<Integer> box=new HashSet<>();
+        for(int k=0;k<9;k++)
+        {
+            if(board[k][j]!='.')
+                row.add(board[k][j]-'0');
+        }
+        for(int k=0;k<9;k++)
+        {
+            if(board[i][k]!='.')
+                row.add(board[i][k]-'0');
+        }
+        int b=j-j%3,a=i-i%3,c=a+3,d=b+3;
+        for(;a<c;a++)
+        {
+            for(b=j-j%3;b<d;b++)
+            {
+                if(board[a][b]!='.')
+                   box.add(board[a][b]-'0');
+            }
+        }
+        for(int k=1;k<=9;k++)
+        {
+            if(!row.contains(k)&&!col.contains(k)&&!box.contains(k))
+            {
+                board[i][j]=(char)(k+'0');
+                boolean ret=fun(board,i,j+1);
+                if(ret==true)
+                   return true;
+                board[i][j]='.';
+            }
+        }
+        return false;
+    }
+    public void solveSudoku(char[][] board) {
+        fun(board,0,0);
+    }
+}
