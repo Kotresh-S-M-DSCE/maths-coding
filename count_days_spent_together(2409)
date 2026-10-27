@@ -1,0 +1,30 @@
+class Solution {
+    public int countDaysTogether(String aalice, String lalice, String abob, String lbob) {
+        int[] arr={0,31,28,31,30,31,30,31,31,30,31,30,31};
+        int a_start=((aalice.charAt(0)-'0')*10+aalice.charAt(1)-'0');
+        int a_last=((lalice.charAt(0)-'0')*10+lalice.charAt(1)-'0');
+        int b_start=((abob.charAt(0)-'0')*10+abob.charAt(1)-'0');
+        int b_last=((lbob.charAt(0)-'0')*10+lbob.charAt(1)-'0');
+        int max=Math.max(Math.max(a_start,a_last),Math.max(b_start,b_last));
+        int sum1=0,sum2=0,sum3=0,sum4=0;
+        for(int i=1;i<=max;i++)
+        {
+            if(a_start>i)
+                sum1+=arr[i];
+            if(a_last>i)
+                sum2+=arr[i];
+            if(b_start>i)
+                sum3+=arr[i];
+            if(b_last>i)
+                sum4+=arr[i];
+        }
+        sum1+=(aalice.charAt(3)-'0')*10+(aalice.charAt(4)-'0');
+        sum2+=(lalice.charAt(3)-'0')*10+(lalice.charAt(4)-'0');
+        sum3+=(abob.charAt(3)-'0')*10+(abob.charAt(4)-'0');
+        sum4+=(lbob.charAt(3)-'0')*10+(lbob.charAt(4)-'0');
+        int ret=Math.min(sum2,sum4)-Math.max(sum1,sum3);
+        if(ret<0)
+            return 0;
+        return ret+1;
+    }
+}
