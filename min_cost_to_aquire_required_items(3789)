@@ -1,0 +1,17 @@
+class Solution {
+    public long minimumCost(int cost1, int cost2, int both, int need1, int need2) {
+        long a=0,b=0,c=0;
+        if(need1>need2)
+        {
+            a=(long)both*(long)need2+((long)need1-(long)need2)*(long)cost1;
+            b=(long)both*(long)need1;
+        }
+        else
+        {
+            a=(long)both*(long)need1+((long)need2-(long)need1)*(long)cost2;
+            b=(long)both*(long)need2;
+        }
+        c=(long)cost1*(long)need1+(long)cost2*(long)need2;
+        return Math.min(Math.min(a,b),c);
+    }
+}
